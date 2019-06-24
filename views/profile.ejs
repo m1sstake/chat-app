@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head> 
+<title>general | Chat</title>
+<meta charset=UTF-8>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet/less" type="text/css" href="css/styles.less" />
+
+</head> 
+<body> 
+    <div class="window-title">
+
+        <div class="title">
+            <span>m1sstake Chat</span>
+        </div>
+        <div class="expand">
+                <a href="/logout" class="btn btn-danger btn-sm">Выйти</a>
+			</div>
+    </div>
+    <div class="window-area">
+        <div class="conversation-list">
+            <ul id='conversation-list1'>
+                <li><a class="open_window" href ="#"><i class="fa fa-list-alt"></i><span>Создать комнату</span></a></li>
+            </ul>
+            <div class="my-account">
+                    
+                <div class="name">
+                    <span><%= user.username %></span>
+                    <i class="fa fa-circle online"></i>
+                    <span class="availability">Онлайн</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="chat-area">
+            <div class="title" id = "roomtitle"></div>
+            <div class="chat-list">
+                <ul class ="messages">
+                </ul>
+            </div>
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <form id ="chat-form" accept-charset="UTF-8">
+                        <textarea spellcheck="false" id ="chatMessage" autocomplete="off" placeholder="Сообщение..."></textarea>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="right-tabs">
+            <ul class="tabs-container">
+                <li class="active">
+                    <h1> Пользователи онлайн:</h1>
+                    <ul class="member-list">
+                    </ul>
+                </li>
+                <li></li>
+                <li></li>
+            </ul>
+ 
+            <i class="fa fa-cog"></i>
+        </div>
+    </div>
+    <div class="overlay" title="окно"></div>
+    <div class="popup">
+        <div class="close_window">x</div>
+                <form action="/addroom" method="post">
+                    <div class="form-group">
+                        <label for="roomName" class="cols-sm-2 control-label">Создание комнаты</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="name" name = "roomname" placeholder="Введите название комнаты"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <BUTTON target="_blank" type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Создать</BUTTON>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.3/less.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+<script src="./socket.io/socket.io.js"></script> 
+<script type="text/javascript" src="js/jquery.emojiFace.js"></script>
+<script type="text/javascript" src ="js/chat_main.js"></script>
+<script type="text/javascript">
+    function addMessage(username, message, date_msg) {
+        if (username == '<%= user.username %>') {
+            $('.messages').append('<li class="me" id = "message"><div class="name"><span class="">' + username + '</span></div><div class="message"><p>'
+                + message + '</p><span class="msg-time">' + date_msg + '</span></div></li>').slideDown(200);
+        }
+        else {
+            $('.messages').append('<li class="" id = "message"><div class="name"><span class="">' + username + '</span></div><div class="message"><p>'
+                + message + '</p><span class="msg-time">' + date_msg + '</span></div></li>').slideDown(200);
+        }
+    };
+</script>
+</html>
